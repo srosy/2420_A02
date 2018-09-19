@@ -12,27 +12,41 @@ import java.util.Iterator;
  */
 public class Deque<Item> implements Iterable<Item> {
 
-	private Deque<Item> d;
-	private Item head;
-	private Item tail;
+	private Node<Item> head; // beginning of queue
+	private Node<Item> tail; // end of queue
 	private int size;
+
+	/**
+	 * Class Node creates a node of type item to be added to the Deque. Class Node
+	 * provides us with information about neighboring nodes, which in turn provides
+	 * self-position.
+	 * 
+	 * @authors Gerald Brady, Spencer Rosenvall
+	 *
+	 * @param <Item>
+	 */
+	private static class Node<Item> {
+		private Item item;
+		private Node<Item> next;
+		private Node<Item> previous;
+	}
 
 	/**
 	 * Create an empty Deque.
 	 * 
 	 */
 	public Deque() {
-		d = new Deque<Item>();
+		size = 0;
 	}
 
 	/**
-	 * is the Deque empty?*
+	 * is the Deque empty?
 	 * 
 	 * @return
 	 * 
 	 */
 	public boolean isEmpty() {
-		if (d.size() <= 0) {
+		if (size() <= 0) {
 			return true;
 		} else {
 			return false;
@@ -46,12 +60,7 @@ public class Deque<Item> implements Iterable<Item> {
 	 * 
 	 */
 	public int size() {
-		int count = 0;
-		for (Item el : d) {
-			if (el != null)
-				count++; // check if el is actually something during iteration.
-		}
-		return count;
+		return size;
 	}
 
 	/**
@@ -62,28 +71,18 @@ public class Deque<Item> implements Iterable<Item> {
 	 */
 	public void addFirst(Item item) {
 		if (item != null) {
-			if (size == 0) {
+			if (size() == 0) {
+				head = new Node<Item>();
+				head.item = item;
 				tail = head;
-				head = item;
-				size++;
+			} else {
+				Node<Item> predecessor = head;
+				head.item = item;
+				head.next = predecessor;
 			}
-			if (size >= 1) {
-
-				Item next = head;
-				head = item;
-
-				// tail =
-
-				for (Item i : d) {
-					if (i == tail) {
-						// stop
-					} else {
-
-					}
-				}
-
-			}
-
+			size++;
+		} else {
+			throw new NullPointerException("Cannot insert null item.");
 		}
 	}
 
