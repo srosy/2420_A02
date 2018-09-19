@@ -2,50 +2,93 @@ package a02;
 
 import java.util.Iterator;
 
+/**
+ * Class Deque implements iterable and can add, remove, and insert generic Items
+ * to/from Deque.
+ * 
+ * @authors Gerald Brady, Spencer Rosenvall
+ *
+ * @param <Item>
+ */
 public class Deque<Item> implements Iterable<Item> {
 
-	/*
-	 * construct an empty deque
-	 */
+	private Deque<Item> d;
+	private Item head;
+	private Item tail;
+	private int size;
 
+	/**
+	 * Create an empty Deque.
+	 * 
+	 */
 	public Deque() {
-		// TODO
+		d = new Deque<Item>();
 	}
 
-	/*
+	/**
+	 * is the Deque empty?*
 	 * 
-	 * is the deque empty?*@return
+	 * @return
+	 * 
 	 */
-
 	public boolean isEmpty() {
-		return false;
-		// TODO
+		if (d.size() <= 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
-	/*
-	 * return
+	/**
+	 * Return the number of Items on the Deque.
 	 * 
-	 * the number of items on the deque*@return
+	 * @return
+	 * 
 	 */
-
 	public int size() {
-		return 0;
-		// TODO
+		int count = 0;
+		for (Item el : d) {
+			if (el != null)
+				count++; // check if el is actually something during iteration.
+		}
+		return count;
 	}
 
-	/*
-	 * 
-	 * insert the item at the front*
+	/**
+	 * Inserts Item at the front of the Deque.
 	 * 
 	 * @param item
+	 * 
 	 */
 	public void addFirst(Item item) {
-		// TODO
+		if (item != null) {
+			if (size == 0) {
+				tail = head;
+				head = item;
+				size++;
+			}
+			if (size >= 1) {
+
+				Item next = head;
+				head = item;
+
+				// tail =
+
+				for (Item i : d) {
+					if (i == tail) {
+						// stop
+					} else {
+
+					}
+				}
+
+			}
+
+		}
 	}
 
-	/*
-	 * 
-	 * insert the item at the end*
+	/**
+	 * Inserts the Item at the end of the Deque.
 	 * 
 	 * @param item
 	 */
@@ -53,21 +96,23 @@ public class Deque<Item> implements Iterable<Item> {
 		// TODO
 	}
 
-	/*
+	/**
+	 * Delete and return the item at the front of the Deque.
 	 * 
-	 * delete and return the item at the front*@return
+	 * @return
+	 * 
 	 */
-
 	public Item removeFirst() {
 		return null;
 		// TODO
 	}
 
-	/*
+	/**
+	 * Delete and return the item at the end of the Deque.
 	 * 
-	 * delete and return the item at the end*@return
+	 * @return
+	 * 
 	 */
-
 	public Item removeLast() {
 		return null;
 		// TODO
@@ -79,18 +124,11 @@ public class Deque<Item> implements Iterable<Item> {
 		return null;
 	}
 
-	/*
-	 * return
+	/**
+	 * Test client for class Deque.
 	 * 
-	 * an iterator over items in order from front to end*@return/
-	 * 
-	 * public Iterable<Item> iterator() { //TODO return null; }
-	 * 
-	 * /*******
-	 * 
-	 * Test Client
-	 *******/
-
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 	}
