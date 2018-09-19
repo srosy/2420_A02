@@ -1,3 +1,10 @@
+/************************************************
+ * Author(s): Gerald Brady, Spencer Rosenvall
+ * Class: CSIS 2420
+ * Professor: Frau Posch
+ * Assignment: A02_RadomizedQueuesAndDeques
+ ************************************************/
+
 package a02;
 
 import java.util.Iterator;

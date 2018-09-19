@@ -1,3 +1,10 @@
+/************************************************
+ * Author(s): Gerald Brady, Spencer Rosenvall
+ * Class: CSIS 2420
+ * Professor: Frau Posch
+ * Assignment: A02_RadomizedQueuesAndDeques
+ ************************************************/
+
 package a02;
 
 import java.util.Iterator;
@@ -124,7 +131,6 @@ public class Deque<Item> implements Iterable<Item> {
 			if (size <= 0) {
 				tail = null;
 			}
-
 			return i;
 		} else {
 			throw new NoSuchElementException("No item to remove from deque");
@@ -145,7 +151,6 @@ public class Deque<Item> implements Iterable<Item> {
 			if (size <= 0) {
 				tail = null;
 			}
-
 			return i;
 		} else {
 			throw new NoSuchElementException("No item to remove from deque");
