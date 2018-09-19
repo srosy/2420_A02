@@ -1,6 +1,7 @@
 package a02;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * Class Deque implements iterable and can add, remove, and insert generic Items
@@ -92,7 +93,21 @@ public class Deque<Item> implements Iterable<Item> {
 	 * @param item
 	 */
 	public void addLast(Item item) {
-		// TODO
+		if (item != null) {
+			if (size() == 0) {
+				head = new Node<Item>();
+				head.item = item;
+				tail = head;
+			} else {
+				Node<Item> successor = tail;
+				tail.item = item;
+				tail.previous = successor;
+				successor.next = tail;
+			}
+			size++;
+		} else {
+			throw new NullPointerException("Cannot insert null item.");
+		}
 	}
 
 	/**
@@ -102,8 +117,18 @@ public class Deque<Item> implements Iterable<Item> {
 	 * 
 	 */
 	public Item removeFirst() {
-		return null;
-		// TODO
+		if (!isEmpty()) {
+			Item i = head.item;
+			head = head.next;
+			size--;
+			if (size <= 0) {
+				tail = null;
+			}
+
+			return i;
+		} else {
+			throw new NoSuchElementException("No item to remove from deque");
+		}
 	}
 
 	/**
@@ -113,8 +138,18 @@ public class Deque<Item> implements Iterable<Item> {
 	 * 
 	 */
 	public Item removeLast() {
-		return null;
-		// TODO
+		if (!isEmpty()) {
+			Item i = tail.item;
+			tail = tail.next;
+			size--;
+			if (size <= 0) {
+				tail = null;
+			}
+
+			return i;
+		} else {
+			throw new NoSuchElementException("No item to remove from deque");
+		}
 	}
 
 	@Override
