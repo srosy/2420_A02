@@ -21,6 +21,8 @@ public class Subset {
 	public static void main(String[] args) {
 		String[] stringArray = StdIn.readAllStrings(); // read in all the strings
 		RandomizedQueue<String> rq = new RandomizedQueue<>();
+
+		// get the exact amount of args we're giving our test client, num strings (N)
 		int k = Integer.parseInt(args[0]);
 
 		for (String s : stringArray) { // Add String to queue.

@@ -11,66 +11,74 @@ import java.util.Iterator;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
-	/*
-	 * construct an empty randomized queue
-	 **/
+	private int size;
+	private Item[] items;
 
+	/**
+	 * Constructs an empty randomized queue.
+	 */
 	public RandomizedQueue() {
-		// TODO
+		items = (Item[]) new Object[1]; // min size for array is 1, cast as FAQ suggests
+		size = 0;
 	}
 
-	/*
+	/**
+	 * Checks if the queue is empty.
 	 * 
-	 * is the queue empty?*@return
+	 * @return boolean
 	 */
-
 	public boolean isEmpty() {
-		return false;// TODO
-
+		return size == 0 ? true : false;
 	}
 
-	/*
-	 * return
+	/**
+	 * Returns the number of items on the queue.
 	 * 
-	 * the number of items on the queue*@return
+	 * @return int
 	 */
-
 	public int size() {
 		return 0;// TODO
 
 	}
 
-	/*
-	 * 
-	 * add the item*
+	/**
+	 * Adds an item to the queue.
 	 * 
 	 * @param item
 	 */
 	public void enqueue(Item item) {
-
+		// TODO
+		// check end of list ? create new array with array.length * 2.
+		// add item to queue.
 	}
 
-	/*
+	/**
+	 * Deletes and returns a random item.
 	 * 
-	 * delete and return a random item*@return
+	 * @return Item
 	 */
-
 	public Item dequeue() {
-		return null;// TODO
+		// TODO
+		// check if size <= (array.length / 4) ? create new array with half size.
+		// return the item dequeued.
+		return null;
 
 	}
 
-	/*
-	 * return(but do
+	/**
+	 * Returns (but does not delete) a random item.
 	 * 
-	 * not delete) a random item*@return
+	 * @return Item
 	 */
-
 	public Item sample() {
+		// select a random item.
 		return null;// TODO
 
 	}
 
+	/**
+	 * Returns an independent iterator over items in random order
+	 */
 	@Override
 	public Iterator<Item> iterator() {
 		// TODO Auto-generated method stub
@@ -78,11 +86,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	}
 
 	/**
-	 * return an independent iterator over items in random order
-	 * 
-	 * @return / public Iterator<Item> iterator() { //TODO }
-	 * 
-	 *         / * * * * * * * Test Client * * * * * *
+	 * Test client for Class RandomizedQueue. Tests functionality of the class.
 	 */
 	public static void main(String[] args) {
 		// TODO
