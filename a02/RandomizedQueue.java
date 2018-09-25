@@ -1,5 +1,3 @@
-package a02;
-
 /************************************************
  * Author(s): Gerald Brady, Spencer Rosenvall
  * Class: CSIS 2420
@@ -7,20 +5,23 @@ package a02;
  * Assignment: A02_RadomizedQueuesAndDeques
  ************************************************/
 
+package a02;
+
 import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import edu.princeton.cs.algs4.StdRandom;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
-    private Item[] items; 
-    private int size = 0;
-    
+	private Item[] items;
+	private int size;
+
 	/**
 	 * Constructs an empty randomized queue.
 	 **/
 	public RandomizedQueue() {
-		items = (Item[]) new Object[1]; //TODO how do we deal with the Type Safety?
+		items = (Item[]) new Object[1]; // copied exactly as specified in frequently asked questions
 		size = 0;
-		
 	}
 
 	/**
@@ -29,8 +30,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	 * @return boolean
 	 */
 	public boolean isEmpty() {
-		return size == 0;// TODO no need to add this: (? true : false;)
-
+		return size == 0;
 	}
 
 	/**
@@ -40,96 +40,130 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	 */
 	public int size() {
 		return size;
-
 	}
-	
+
 	/**
 	 * Adds an item to the queue.
 	 * 
 	 * @param item
 	 */
 	public void enqueue(Item item) {
-		if (item == null)
+		if (item == null) {
 			throw new NullPointerException();
-		
-		if (size == items.length)
-			resize(items.length * 2);
-		
+		}
+		determineResize();
 		items[size] = item;
 		size++;
-		
 	}
-	
+
 	/**
 	 * Deletes and returns a random item.
 	 *
 	 * @return Item
 	 */
 	public Item dequeue() {
-		if (isEmpty())
+		if (isEmpty()) {
 			throw new java.util.NoSuchElementException();
-		
+		}
+
 		int random = StdRandom.uniform(size);
 		Item item = items[random];
-		
-		if (random != size -1)
-			items[random] = items[size - 1];
-		
-		// Loitering removal?  is this how I do it??
-		items[size - 1] = null;
 		size--;
-		
-		// resize smaller at 1/4
-		if (size > 0 && size == (items.length / 4))
-			resize(items.length / 2);
-		
+		items[random] = items[size];
+		items[size] = null; // loitering handling
+		determineResize();
 		return item;
-		
 	}
-	
+
+	/**
+	 * Determines if items array should resize and resizes conditionally.
+	 */
+	private void determineResize() {
+		// resize smaller at 1/4
+		if (size > 2 && size == (items.length / 4)) {
+			resize(items.length / 2);
+		}
+		if (size == items.length) {
+			resize(items.length * 2);
+		}
+	}
+
 	/**
 	 * Returns (but does not delete) a random item.
 	 * 
 	 * @return Item
 	 */
 	public Item sample() {
-		//TODO do we need to add this if it is empty?
-//		if (isEmpty())
-//			throw new java.util.NoSuchElementException();
-			
+		if (isEmpty()) {
+			throw new java.util.NoSuchElementException();
+		}
 		int random = StdRandom.uniform(size);
-		Item item = items[random];
-		
-		return item;
-
+		return items[random]; // don't create a new item, just return the reference (sample) to one
+		// otherwise we loiter.
 	}
-	
-	//TODO we can add a resize method, right??
-    private void resize(int newSize) {
-        Item tempItems[] = (Item[]) new Object[newSize];//TODO how do we deal with the Type Safety?
 
-        for (int i = 0; i < size; i++) {//TODO check to see if size (i < size) should be (i < newSize)
-        	tempItems[i] = items[i];
-        }
-        items = tempItems;
+	private void resize(int newSize) {
+		@SuppressWarnings("unchecked")
+		Item tempItems[] = (Item[]) new Object[newSize];
 
-    }	
-	
-	/**
-	 * Returns an independent iterator over items in random order
-	 */
+		for (int i = 0; i < size; i++) {// TODO check to see if size (i < size) should be (i < newSize)
+			tempItems[i] = items[i];
+		}
+		items = tempItems;
+	}
+
 	@Override
 	public Iterator<Item> iterator() {
-		// TODO Auto-generated method stub
-		//throw a java.lang.UnsupportedOperationException if the client calls the remove() method in the iterator
-		return null;
+		return new IndependentIterator();
 	}
 
 	/**
-	 * Test client for Class RandomizedQueue. Tests functionality of the class.
+	 * Class IndependentIterator iterates through a list of items.
 	 */
-	public static void main(String[] args) {
-		// TODO
-	}
+	private class IndependentIterator implements Iterator<Item> {
 
+		private Item[] independentIteratorItems;
+		private int index;
+
+		/**
+		 * Constructs an independent, random iterator.
+		 */
+		@SuppressWarnings("unchecked")
+		public IndependentIterator() {
+			independentIteratorItems = (Item[]) new Object[size];
+			for (int i = 0; i < size; i++) { // copy items[]
+				independentIteratorItems[i] = items[i];
+			}
+			StdRandom.shuffle(independentIteratorItems); // randomize
+		}
+
+		/**
+		 * Returns a boolean if the iterator has a next item.
+		 */
+		@Override
+		public boolean hasNext() {
+			return index < independentIteratorItems.length;
+		}
+
+		/**
+		 * Returns the next item.
+		 */
+		@Override
+		public Item next() {
+			if (hasNext()) {
+				return independentIteratorItems[index++];
+			} else {
+				throw new NoSuchElementException();
+			}
+		}
+
+		/**
+		 * Throws a UnsupportedOperationException because the user shouldn't remove with
+		 * this iterator.
+		 */
+		public void remove() {
+			// Handle should remove be called during iteration
+			throw new UnsupportedOperationException("Cannot remove during iteration");
+		}
+	}
 }
