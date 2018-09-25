@@ -1,22 +1,24 @@
 package a02;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class RandomizedQueueTest {
 	private RandomizedQueue<String> randomQueue;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		randomQueue = new RandomizedQueue<String>();
 	}
 
-//	@Test
-//	public void testRandomizedQueue() {
-//		fail("Not yet implemented");
-//	}
+	// @Test
+	// public void testRandomizedQueue() {
+	// fail("Not yet implemented");
+	// }
 
 	@Test
 	public void testIsEmpty() {
@@ -35,7 +37,7 @@ public class RandomizedQueueTest {
 		randomQueue.enqueue("Supdman");
 		assertEquals(randomQueue.size(), 2);
 	}
-	
+
 	@Test
 	public void testSize4() {
 		randomQueue.enqueue("Ironman");
@@ -53,14 +55,14 @@ public class RandomizedQueueTest {
 
 	@Test
 	public void testEnqueue2() {
-		//TODO not sure how to check a random item name
+		// TODO not sure how to check a random item name
 		randomQueue.enqueue("Ironman");
 		randomQueue.enqueue("Supdman");
 		randomQueue.enqueue("Runningman");
 		randomQueue.enqueue("I am Batman");
-		assertEquals(randomQueue.sample(), "Ironman");//This should return a failure about 1/4 the time
+		assertEquals(randomQueue.sample(), "Ironman");// This should return a failure about 1/4 the time
 	}
-	
+
 	@Test
 	public void testDequeue3() {
 		randomQueue.enqueue("Ironman");
@@ -82,16 +84,16 @@ public class RandomizedQueueTest {
 		randomQueue.dequeue();
 		assertEquals(randomQueue.size(), 1);
 	}
-	
-	@Test
-	public void testSample() {
-		//TODO not sure how to check a random sample
-		fail("Not yet implemented");
-	}
 
-	@Test
-	public void testIterator() {
-		fail("Not yet implemented");
-	}
+	// @Test
+	// public void testSample() {
+	// // TODO not sure how to check a random sample
+	// fail("Not yet implemented");
+	// }
+	//
+	// @Test
+	// public void testIterator() {
+	// fail("Not yet implemented");
+	// }
 
 }

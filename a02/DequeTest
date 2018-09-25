@@ -1,22 +1,24 @@
 package a02;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Before;
 import org.junit.Test;
 
 public class DequeTest {
 	private Deque<String> deque;
-	
+
 	@Before
 	public void setUp() throws Exception {
 		deque = new Deque<String>();
 	}
 
-//	@Test
-//	public void testDeque() {
-//		fail("Not yet implemented");
-//	}
+	// @Test
+	// public void testDeque() {
+	// fail("Not yet implemented");
+	// }
 
 	@Test
 	public void testIsEmpty() {
@@ -28,7 +30,7 @@ public class DequeTest {
 		deque.addFirst("Ironman");
 		assertFalse(deque.isEmpty());
 	}
-	
+
 	@Test
 	public void testSize() {
 		fail("Not yet implemented");

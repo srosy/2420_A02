@@ -19,6 +19,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	/**
 	 * Constructs an empty randomized queue.
 	 **/
+	@SuppressWarnings("unchecked")
 	public RandomizedQueue() {
 		items = (Item[]) new Object[1]; // copied exactly as specified in frequently asked questions
 		size = 0;
@@ -98,8 +99,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			throw new java.util.NoSuchElementException();
 		}
 		int random = StdRandom.uniform(size);
-		return items[random]; // don't create a new item, just return the reference (sample) to one
-		// otherwise we loiter.
+		return items[random];
 	}
 
 	private void resize(int newSize) {
@@ -165,5 +165,43 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 			// Handle should remove be called during iteration
 			throw new UnsupportedOperationException("Cannot remove during iteration");
 		}
+	}
+
+	/**
+	 * Test client for class RandomizedQueue.java
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		RandomizedQueue<Object> rq = new RandomizedQueue<>(); // Object allows any type
+
+		System.out.println("isEmpty: " + rq.isEmpty());
+		System.out.println();
+
+		rq.enqueue("ninja");
+		rq.enqueue("pirate");
+		rq.enqueue("cowboy");
+		rq.enqueue("warrior");
+		System.out.println("Items: ");
+		for (Object o : rq.items) {
+			System.out.println(o.toString());
+		}
+
+		System.out.println("size: " + rq.size);
+		System.out.println();
+
+		System.out.println("Random sample: " + rq.sample().toString());
+		System.out.println();
+
+		rq.dequeue();
+		rq.dequeue();
+		System.out.println("Items: ");
+		for (Object o : rq.items) {
+			if (o != null) {
+				System.out.println(o.toString());
+			}
+		}
+		System.out.println("size: " + rq.size);
+		System.out.println("isEmpty: " + rq.isEmpty());
 	}
 }

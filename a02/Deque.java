@@ -36,6 +36,7 @@ public class Deque<Item> implements Iterable<Item> {
 	private static class Node<Item> {
 		private Item item;
 		private Node<Item> next;
+		@SuppressWarnings("unused")
 		private Node<Item> previous;
 	}
 
@@ -169,7 +170,26 @@ public class Deque<Item> implements Iterable<Item> {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Deque<Object> d = new Deque<>();
 
+		System.out.println("isEmpty: " + d.isEmpty());
+		System.out.println("Size: " + d.size());
+		System.out.println();
+
+		d.addFirst("ninja");
+		d.addFirst("toaster");
+		d.addLast("I am last");
+
+		System.out.println("isEmpty: " + d.isEmpty());
+		System.out.println("Size of items inserted to beginning and end of deque: " + d.size());
+		System.out.println();
+
+		d.removeLast();
+		System.out.println("Size after last item removed: " + d.size());
+		System.out.println();
+
+		d.removeFirst();
+		System.out.println("Size after first item removed: " + d.size());
 	}
 
 }
