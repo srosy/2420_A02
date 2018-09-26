@@ -1,12 +1,13 @@
+package a02;
+
 /************************************************
  * Author(s): Gerald Brady, Spencer Rosenvall
  * Class: CSIS 2420
  * Professor: Margarethe Posch
  * Assignment: A02_RadomizedQueuesAndDeques
  ************************************************/
-package a02;
 
-import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdRandom;
 
 /**
  * Class Subset is a test client for classes Deque.java and
@@ -18,18 +19,37 @@ import edu.princeton.cs.algs4.StdIn;
  */
 public class Subset {
 
+	//in place of command read in, create a String of an array and enter the words.  command line is his
+	//automated version of testing the written code
+	// String [] words (letters)
+	// int k = a random number 1 to size 
+	/**
+	 * % echo A B C D E F G H I | java Subset 3       % echo AA BB BB BB BB BB CC CC | java Subset 8
+	 *C                                              BB
+	 *G                                              AA
+	 *A                                              BB
+	 *                                               CC
+	 *% echo A B C D E F G H I | java Subset 3       BB
+	 *E                                              BB
+	 *F                                              CC
+	 *G                                              BB
+	 */
 	public static void main(String[] args) {
-		String[] stringArray = StdIn.readAllStrings(); // read in all the strings
+		//String[] stringArray = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
+		String[] stringArray = {"AA", "BB", "BB", "BB", "BB", "BB", "CC", "CC"};
+		int k = StdRandom.uniform(1, stringArray.length);
 		RandomizedQueue<String> rq = new RandomizedQueue<>();
-
-		// get the exact amount of args we're giving our test client, num strings (N)
-		int k = Integer.parseInt(args[0]);
-
-		for (String s : stringArray) { // Add String to queue.
+		
+		System.out.print(" % echo ");
+		// Add String to queue.
+		for (String s : stringArray) {
 			rq.enqueue(s);
+			System.out.print(rq.sample() + " ");
 		}
+		System.out.println("| java Subset " + k);
 
-		for (int i = 0; i < k; i++) { // Remove String from deque.
+		// Remove String from deque.
+		for (int i = 0; i < k; i++) {
 			System.out.println(rq.dequeue());
 		}
 	}
