@@ -158,10 +158,52 @@ public class Deque<Item> implements Iterable<Item> {
 		}
 	}
 
+	/**
+	 * Creates a DequeIterator object.
+	 */
 	@Override
 	public Iterator<Item> iterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return new DequeIterator();
+	}
+
+	/**
+	 * Class DequeIterator iterates through from front to end.
+	 * 
+	 * @authors Gerald Brady, Spencer Rosenvall
+	 *
+	 */
+	private class DequeIterator implements Iterator<Item> {
+
+		private Node<Item> current = head;
+
+		/**
+		 * Checks is the deque has a next item.
+		 */
+		@Override
+		public boolean hasNext() {
+			return current == null ? false : true;
+		}
+
+		/**
+		 * Returns the next item in the deque.
+		 */
+		@Override
+		public Item next() {
+			if (!hasNext()) {
+				throw new NoSuchElementException("No next item, end of deque reached.");
+			}
+			Item next = current.item;
+			current = current.next;
+			return next;
+		}
+
+		/**
+		 * Throws an UnsopportedOperationException if remove() is attempted.
+		 */
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException("Cannot remove");
+		}
 	}
 
 	/**
