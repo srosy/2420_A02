@@ -49,7 +49,7 @@ public class Deque<Item> implements Iterable<Item> {
 	}
 
 	/**
-	 * is the Deque empty?
+	 * Checks to see if the Deque is empty?
 	 * 
 	 * @return
 	 * 
