@@ -21,7 +21,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	 **/
 	@SuppressWarnings("unchecked")
 	public RandomizedQueue() {
-		items = (Item[]) new Object[1]; // copied exactly as specified in frequently asked questions
+		items = (Item[]) new Object[1];
 		size = 0;
 	}
 
@@ -71,16 +71,16 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		Item item = items[random];
 		size--;
 		items[random] = items[size];
-		items[size] = null; // loitering handling
+		items[size] = null;
 		determineResize();
 		return item;
 	}
 
 	/**
 	 * Determines if items array should resize and resizes conditionally.
+	 * 
 	 */
 	private void determineResize() {
-		// resize smaller at 1/4
 		if (size > 2 && size == (items.length / 4)) {
 			resize(items.length / 2);
 		}
@@ -106,7 +106,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		@SuppressWarnings("unchecked")
 		Item tempItems[] = (Item[]) new Object[newSize];
 
-		for (int i = 0; i < size; i++) {// TODO check to see if size (i < size) should be (i < newSize)
+		for (int i = 0; i < size; i++) {
 			tempItems[i] = items[i];
 		}
 		items = tempItems;
@@ -131,10 +131,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		@SuppressWarnings("unchecked")
 		public IndependentIterator() {
 			independentIteratorItems = (Item[]) new Object[size];
-			for (int i = 0; i < size; i++) { // copy items[]
+			for (int i = 0; i < size; i++) {
 				independentIteratorItems[i] = items[i];
 			}
-			StdRandom.shuffle(independentIteratorItems); // randomize
+			StdRandom.shuffle(independentIteratorItems);
 		}
 
 		/**
@@ -162,7 +162,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 		 * this iterator.
 		 */
 		public void remove() {
-			// Handle should remove be called during iteration
 			throw new UnsupportedOperationException("Cannot remove during iteration");
 		}
 	}
@@ -173,7 +172,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		RandomizedQueue<Object> rq = new RandomizedQueue<>(); // Object allows any type
+		RandomizedQueue<Object> rq = new RandomizedQueue<>();
 
 		System.out.println("isEmpty: " + rq.isEmpty());
 		System.out.println();
