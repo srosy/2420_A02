@@ -18,22 +18,6 @@ import edu.princeton.cs.algs4.StdRandom;
  *
  */
 public class Subset {
-
-	//in place of command read in, create a String of an array and enter the words.  command line is his
-	//automated version of testing the written code
-	// String [] words (letters)
-	// int k = a random number 1 to size 
-	/**
-	 * % echo A B C D E F G H I | java Subset 3       % echo AA BB BB BB BB BB CC CC | java Subset 8
-	 *C                                              BB
-	 *G                                              AA
-	 *A                                              BB
-	 *                                               CC
-	 *% echo A B C D E F G H I | java Subset 3       BB
-	 *E                                              BB
-	 *F                                              CC
-	 *G                                              BB
-	 */
 	public static void main(String[] args) {
 		//String[] stringArray = {"A", "B", "C", "D", "E", "F", "G", "H", "I"};
 		String[] stringArray = {"AA", "BB", "BB", "BB", "BB", "BB", "CC", "CC"};
